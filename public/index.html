@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<!-- Student employees immediately after the conclusion of a work period will need to email av_productions@byu.edu: 
+  a report of how much time was spent working, 
+  the area worked (lighting, audio, video, delivery),
+  and the associated work-order number/title for that work. 
+  Time should be reported as accurately as possible to the tenth of an hour (6 minutes.) -->
+
+<html>
+
+<head>
+  <link rel="icon" href="images/AV.png">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <title>AV Timekeeper</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="title">
+      <img class="logo" src="/images/BYU-AV.svg">
+      <svg height="3em" width="1em">
+        <line x1=".36em" y1="0" x2=".36em" y2="3em" style="stroke: #ffffff; stroke-width: 1"></line>
+      </svg>
+      <h1 style="margin: .33em 0;">Timekeeper</h1>
+    </div>
+    <div class="subtitle">
+      <h5>MADE</h5>
+      <h6>BY</h6>
+      <h5><a href="/admin.html">DALLIN GOODSELL - V0.0</a></h5>
+    </div>
+  </div>
+  <div id="app" class="content">
+    <div class="form">
+      <div class="name">
+        <h3>Name:</h3>
+        <input v-model="name" placeholder="Full Name">
+      </div>
+      <div class="time">
+        <h3>Time:<div style="display: inline; margin: 0; margin-left: .36em; color: #002E5D;" v-if="this.clockin !== '' && this.clockout !== ''">{{computedTime}} hrs</div></h3>
+        <div v-if="span">
+          <div class="times">
+            <h4 style="display: inline;">In:</h3>
+            <input type="time" v-model="clockin"/>
+          </div>
+          <div class="times">
+            <h4 style="display: inline;">Out:</h3>
+            <input type="time" v-model="clockout"/>
+          </div>
+        </div>
+        <input v-else v-model="time">
+      </div>
+      <div class="crew">
+        <h3>Crew:</h3>
+        <select v-model="crew">
+          <option v-for="crew in crews">{{crew}}</option>
+        </select>
+      </div>
+      <div class="order">
+        <h3>Order Number:<div style="display: inline; margin: 0; margin-left: .36em; color: #002E5D;" v-if="order !== null">{{order.number}}</div></h3>
+        <select v-if="this.orders.length > 0" v-model="order">
+          <option v-for="order in orders" v-bind:value="order">{{order.name}} ({{order.date}})</option>
+        </select>
+        <h3 v-else>n/a - no orders available</h3>
+      </div>
+      <div class="submit">
+        <button @click="sendEmail">Submit</button>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
+  <script src="/vue_main.js"></script>
+</body>
+
+</html>

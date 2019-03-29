@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="icon" href="images/AV.png">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <title>AV Timekeeper ADMIN</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="title">
+      <img class="logo" src="/images/BYU-AV.svg">
+      <svg height="3em" width="1em">
+        <line x1=".36em" y1="0" x2=".36em" y2="3em" style="stroke: #ffffff; stroke-width: 1"></line>
+      </svg>
+      <h1 style="margin: .33em 0;">Timekeeper</h1>
+    </div>
+    <div class="subtitle">
+      <h5>MADE</h5>
+      <h6>BY</h6>
+      <h5><a href="/index.html">DALLIN GOODSELL</a> - V0.0</h5>
+    </div>
+  </div>
+  <div id="admin" class="adminContent">
+    <div class="adminForm">
+      <div class="name">
+        <h3>Event Name:</h3>
+        <input v-model="name" placeholder="Event Name">
+      </div>
+      <div class="order">
+          <h3>Order Number:</h3>
+          <input v-model="number" placeholder="AV-#####-##">
+        </div>
+      <div class="date">
+        <h3>Event Date:</h3>
+        <input type="date" v-model="date"/>
+      </div>
+      <div class="submit">
+        <button @click="submitOrder">Submit</button>
+      </div>
+    </div>
+    <h3 style="margin: 1em;">Current Work Orders:</h3>
+    <ul>
+      <li v-for="order in orders">
+        {{ order.name }} ({{order.date}})
+        <button @click="removeOrder(order)" class="delete" title="Remove order">X</button>
+      </li>
+    </ul>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
+  <script src="/vue_admin.js"></script>
+</body>
+
+</html>

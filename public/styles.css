@@ -1,0 +1,139 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  background: #ffffff;
+  padding: 0px;
+  margin: 0px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.adminContent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.adminForm {
+  display: inline;
+  flex-basis: 100%;
+}
+
+.logo {
+  height: 2em;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin-top: .66em;
+}
+
+.title * {
+  margin: .66em 0 .66em 0;
+}
+
+.title svg {
+  margin: 0;
+}
+
+.subtitle {
+  margin: .33em;
+}
+
+.subtitle h5, h6 {
+  display: inline;
+  margin: 0 .066em;
+}
+
+.subtitle a:link {
+  text-decoration: none;
+  color: white;
+}
+
+.subtitle a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+.subtitle a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.subtitle a:active {
+  text-decoration: none;
+  color: white;
+}
+
+.form h3 {
+  margin: .5em 0 .5em 0;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: #002E5D;
+  color: #ffffff;
+}
+
+.content {
+  margin: 3em;
+  display: flex;
+}
+
+.content > div > div {
+  display: inline-block;
+  margin: 1em;
+}
+
+.adminContent {
+  margin: 3em;
+  display: flex;
+}
+
+.adminContent > div > div {
+  display: inline-block;
+  margin: 1em;
+}
+
+.times {
+  display: inline-block;
+  margin: 0 .3em 0 .3em;
+}
+
+input, textarea, select, button {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+}
+
+ul {
+  margin: 0;
+  list-style: none;
+}
+
+li {
+  color: #002E5D;
+  background: #f0f0f0;
+  width: 33em;
+  min-height: 1.66em;
+  padding: .33em;
+  margin-bottom: .33em;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.delete {
+  display: none;
+  margin-left: auto;
+}
+
+li:hover .delete {
+  display: block;
+}

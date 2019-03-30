@@ -105,7 +105,7 @@ app.post('/api/send-email', function (req, res) {
   res.sendStatus(200);
 });
 
-let server = app.listen(3636, () => {
+let server = app.listen(3939, () => {
     let port = server.address().port;
     console.log("Server started at http://localhost:%s", port);
 });

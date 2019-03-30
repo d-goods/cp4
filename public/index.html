@@ -12,7 +12,7 @@
   <link rel="icon" href="images/AV.png">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css" />
-  <title>AV Timekeeper</title>
+  <title>Timekeeper</title>
 </head>
 
 <body>
@@ -63,10 +63,19 @@
         </select>
         <h3 v-else>n/a - no orders available</h3>
       </div>
+      <div class="email">
+        <h3>Email Address:</h3>
+        <input v-model="recipient" placeholder="yours@whatever.com">
+      </div>
       <div class="submit">
         <button @click="sendEmail">Submit</button>
       </div>
     </div>
+    <h2 style="text-align: center; margin: auto 0;"><i>NOTE: </i>I wrote this website for the AV department on campus (that I work for) to keep track of work orders. 
+      You can add to and edit the work order pool below and then come back and email yourself the data you entered to get a feel for how it works.</h2>
+    <form style="align-self: center;" action="/admin.html">
+      <input id="swapButton" type="submit" value="ADD/EDIT WORK ORDERS"/>
+    </form>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>

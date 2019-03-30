@@ -1,9 +1,16 @@
+html {
+  height: 100vh;
+}
+
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'montserrat', sans-serif;
   font-size: 16px;
   background: #ffffff;
   padding: 0px;
   margin: 0px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .header {
@@ -16,12 +23,15 @@ body {
 .adminContent {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  height: 100%;
 }
 
 .adminForm {
   display: inline;
-  flex-basis: 100%;
+}
+
+.wopool {
+  width: 100%;
 }
 
 .logo {
@@ -85,6 +95,15 @@ body {
 .content {
   margin: 3em;
   display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#swapButton {
+  margin-top: auto;
+  align-self: center;
+  width: 15em;
+  height: 3em;
 }
 
 .content > div > div {
@@ -108,8 +127,26 @@ body {
 }
 
 input, textarea, select, button {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'montserrat', sans-serif;
   font-size: 1em;
+}
+
+table {
+  text-align: left;
+  width: 100%;
+}
+
+.tableHead {
+  font-family: 'montserrat', sans-serif;
+  height: 2em;
+}
+
+th {
+  width: 16em;
+}
+
+tr {
+  height: 2em;
 }
 
 ul {
@@ -134,6 +171,84 @@ li {
   margin-left: auto;
 }
 
-li:hover .delete {
+tr:hover .delete {
   display: block;
+  border: none;
+  outline:none;
+  overflow: hidden;
+  height: 1.66em;
+  width: 1.66em;
+  background-color: transparent;
+  background-image: url(images/baseline-delete_forever-24px.svg);
+  background-size: cover;
+}
+
+.edit {
+  display: none;
+  margin-left: auto;
+}
+
+tr:hover .edit {
+  display: block;
+  border: none;
+  outline:none;
+  overflow: hidden;
+  height: 1.66em;
+  width: 1.66em;
+  background-color: transparent;
+  background-image: url(images/baseline-edit-24px.svg);
+  background-size: cover;
+}
+
+.apply {
+  display: none;
+  margin-left: auto;
+}
+
+tr:hover .apply {
+  display: block;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  height: 1.66em;
+  width: 1.66em;
+  background-color: transparent;
+  background-size: cover;
+  background-image: url(images/baseline-done-24px.svg);
+}
+
+.deleteEditing {
+  display: block;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  height: 1.66em;
+  width: 1.66em;
+  background-color: transparent;
+  background-size: cover;
+  background-image: url(images/baseline-delete_forever-24px.svg);
+}
+
+.editEditing {
+  display: block;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  height: 1.66em;
+  width: 1.66em;
+  background-color: transparent;
+  background-size: cover;
+  background-image: url(images/baseline-edit-24px.svg);
+}
+
+.applyEditing {
+  display: block;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  height: 1.66em;
+  width: 1.66em;
+  background-color: transparent;
+  background-size: cover;
+  background-image: url(images/baseline-done-24px.svg);
 }

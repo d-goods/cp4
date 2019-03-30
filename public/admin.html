@@ -5,7 +5,7 @@
   <link rel="icon" href="images/AV.png">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css" />
-  <title>AV Timekeeper ADMIN</title>
+  <title>Timekeeper ADMIN</title>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
     <div class="subtitle">
       <h5>MADE</h5>
       <h6>BY</h6>
-      <h5><a href="/index.html">DALLIN GOODSELL</a> - V0.0</h5>
+      <h5><a href="/index.html">DALLIN GOODSELL</a> - V1.0</h5>
     </div>
   </div>
   <div id="admin" class="adminContent">
@@ -41,13 +41,36 @@
         <button @click="submitOrder">Submit</button>
       </div>
     </div>
-    <h3 style="margin: 1em;">Current Work Orders:</h3>
-    <ul>
-      <li v-for="order in orders">
-        {{ order.name }} ({{order.date}})
-        <button @click="removeOrder(order)" class="delete" title="Remove order">X</button>
-      </li>
-    </ul>
+    <div class="wopool">
+      <h3 style="margin: 1em;">Current Work Orders:</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Number</th>
+          <th>Date</th>
+        </tr>
+        <tr v-for="order in orders">
+          <td>
+            <span v-show="!editing">{{order.name}}</span>
+            <input v-show="editing" v-model="order.name" type="text"/>
+          </td>
+          <td>
+              <span v-show="!editing">{{order.number}}</span>
+              <input v-show="editing" v-model="order.number" type="text"/>
+          </td>
+          <td>
+              <span v-show="!editing">{{order.date}}</span>
+              <input v-show="editing" v-model="order.date" type="date"/>
+          </td>
+          <td style="width: 2em;"><button v-bind:class="{ applyEditing: editing }" @click="editOrder(order)" v-show="editing" class="apply" title="Apply edit"></button></td>
+          <td style="width: 2em;"><button v-bind:class="{ editEditing: editing }" @click="showEdit" class="edit" title="Edit order"></button></td>
+          <td style="width: 2em;"><button v-bind:class="{ deleteEditing: editing }" @click="removeOrder(order)" class="delete" title="Remove order"></button></td>
+        </tr>
+      </table>
+    </div>
+    <form style="align-self: center; margin-top: auto;" action="/index.html">
+      <input id="swapButton" type="submit" value="GO BACK HOME"/>
+    </form>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>

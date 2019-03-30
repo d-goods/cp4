@@ -1,42 +1,83 @@
-let express = require("express"),
+const express = require("express"),
+  bodyParser = require('body-parser'),
   nodeMailer = require('nodemailer'),
-  bodyParser = require('body-parser');
+  mongoose = require('mongoose');
 
 let app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static('public'));
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+// let orders = [];
+// let id = 0;
 
-let orders = [];
-let id = 0;
+//Connect to the database
+mongoose.connect('mongodb://localhost:27017/cp4', {
+  useNewUrlParser: true
+});
 
-app.post('/api/orders', (req, res) => {
-  id = id + 1;
-  let order = {
-      id: id,
+//Mongo scheme for orders
+const orderSchema = new mongoose.Schema({
+  name: String,
+  number: String,
+  date: String,
+});
+
+//Mongo model for orders
+const Order = mongoose.model('Order', orderSchema);
+
+app.post('/api/orders', async (req, res) => {
+  const order = new Order({
       name: req.body.name,
       number: req.body.number,
       date: req.body.date
-  };
-  orders.push(order);
-  res.send(order);
-});
-
-app.get('/api/orders', (req, res) => {
-  res.send(orders);
-});
-
-app.delete('/api/orders/:id', (req, res) => {
-  let id = parseInt(req.params.id);
-  let removeIndex = orders.map(order => { return order.id; }).indexOf(id);
-  if (removeIndex === -1) {
-      res.status(404).send("Sorry, that item doesn't exist");
-      return;
+  });
+  try {
+    await order.save();
+    res.send(order);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
   }
-  orders.splice(removeIndex, 1);
-  res.sendStatus(200);
+});
+
+app.get('/api/orders', async (req, res) => {
+  try {
+    let orders = await Order.find();
+    res.send(orders);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.put('/api/orders/:id', async (req, res) => {
+  try {
+    let order = await Order.findOne({
+      _id: req.params.id
+    });
+    order.name = req.body.name;
+    order.number = req.body.number;
+    order.date = req.body.date;
+    await order.save();
+    res.send(order);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.delete('/api/orders/:id', async (req, res) => {
+  try {
+    await Order.deleteOne({
+      _id: req.params.id
+    });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
 });
 
 app.post('/api/send-email', function (req, res) {
@@ -46,12 +87,12 @@ app.post('/api/send-email', function (req, res) {
       secure: false,
       requireTLS: true,
       auth: {
-          user: 'oitavstudent@gmail.com',
-          pass: 'oitemail'
+          user: 'byucs260winter2019@gmail.com',
+          pass: 'brigham\'s-beard'
       }
   });
   let mailOptions = {
-      to: 'd_goodsell@byu.edu',
+      to: req.body.recipient,
       subject: req.body.subject,
       html: req.body.message
   };

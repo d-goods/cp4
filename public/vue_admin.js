@@ -2,14 +2,21 @@ var app = new Vue({
   el: '#admin',
   data: {
     name: '',
-    date: '',
+    nameEdit: '',
     number: '',
-    orders: []
+    numberEdit: '',
+    date: '',
+    dateEdit: '',
+    orders: [],
+    editing: false
   },
   created: function() {
     this.getOrders();
   },
   methods: {
+    showEdit() {
+      this.editing = !this.editing
+    },
     async getOrders() {
       try {
         const response = await axios.get("/api/orders");
@@ -31,9 +38,22 @@ var app = new Vue({
         console.log(error);
       }
     },
+    async editOrder(order) {
+      try {
+        axios.put("/api/orders/" + order._id, {
+          name: order.name,
+          number: order.number,
+          date: order.date
+        });
+        this.showEdit();
+        this.getOrders();
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async removeOrder(order) {
       try {
-        axios.delete("/api/orders/" + order.id);
+        axios.delete("/api/orders/" + order._id);
         this.getOrders();
       } catch (error) {
         console.log(error);

@@ -14,7 +14,8 @@ var app = new Vue({
       'Delivery'
     ],
     order: null,
-    orders: []
+    orders: [],
+    recipient: ''
   },
   created: function() {
     this.getOrders();
@@ -56,7 +57,7 @@ var app = new Vue({
       }
     },
     async sendEmail() {
-      if(this.name === '' || this.clockin === '' || this.clockout === '' || this.order === null) {
+      if(this.name === '' || this.clockin === '' || this.clockout === '' || this.recipient === '' || this.order === null) {
         alert("Please fill all fields!");
       } else {
         try {
@@ -65,11 +66,12 @@ var app = new Vue({
             'Crew: ' + this.crew + '<br>' +
             'Time Worked: ' + this.computedTime;
           await axios.post('/api/send-email', {
+            recipient: this.recipient,
             subject: "Time for " + this.order.name,
             message: body
           });
           alert("Email sent!");
-          this.name = this.clockin = this.clockout = '';
+          this.name = this.clockin = this.clockout = this.recipient = '';
           this.order = null;
         } catch (error) {
           console.log(error);
